@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Posts</title>
+{% endblock %}
+
+
+{% block body %}
+<br>
+<div>
+    <h1 style="display:inline">All posts</h1>
+    <a style="display:inline" class="float-end btn btn-success" href="/posts/new">+ New Post</a>
+</div>
+
+    <hr>
+        {% for post in posts %}
+            <div class="card text-center">
+                <div class="card-header">
+                    {% if post.author %}
+                        <h6>Written By {{ post.author }} on {{ post.date_posted}}</h3>
+                    {% else %}
+                        <h6>By: N/A</h3>
+                    {% endif %}
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ post.title }}</h5>
+                    <p style="white-space:pre-wrap" class="card-text">{{ post.content }}</p>
+                </div>
+                <div class="card-footer text-muted">
+                    <a href='/posts/delete/{{post.id}}' class='btn btn-danger'>Delete</a>
+                    <a href='/posts/edit/{{post.id}}' class='btn btn-warning'>Edit</a>
+                </div>
+            </div><br>      
+        {% endfor %}
+{% endblock %}
